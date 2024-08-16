@@ -35,7 +35,8 @@ module "ec2-instance" {
   ami = data.aws_ami.ubuntu-image.id
 
   instance_type = "t2.micro"
-  key_name = "demo-user"
+  key_name = "linuxUpskill"
+  user_data = file("userdata.tpl")
   vpc_security_group_ids = [aws_security_group.sg-demo.id]
 
   tags = {

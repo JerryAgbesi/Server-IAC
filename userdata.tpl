@@ -1,4 +1,7 @@
 #!/bin/bash
-sudo apt update -y &&
-sudo apt install -y nginx
-echo "Terraform-demo instance is up " > /var/www/html/index.html
+
+sudo apt update -y && \
+sudo apt install -y nginx && \
+sudo mkdir -p /var/www/html && \
+sudo chown -R ubuntu:ubuntu /var/www/html
+echo "Terraform-demo instance is up" > /var/www/html/index.html
