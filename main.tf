@@ -36,7 +36,9 @@ module "ec2-instance" {
 
   instance_type = "t2.micro"
   key_name = "linuxUpskill"
-  user_data = file("userdata.tpl")
+
+  user_data = file("userdata.tpl") # Install Nginx and MySQL on the EC2 instance
+
   vpc_security_group_ids = [aws_security_group.sg-demo.id]
 
   tags = {
@@ -67,6 +69,13 @@ resource "aws_security_group" "sg-demo" {
   ingress {
     from_port = 80
     to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress { #port for MySQL database connections 
+    from_port = 3306
+    to_port = 3306
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
